@@ -1,9 +1,5 @@
 import java.util.LinkedList;
-/**
- * Kostas Kopanidis p3130098
- * Xrusa Mauraki p3130128
- * Lefteris Xatziarapis p3130255
- * */
+
 public class BoardState {
 
     private byte red_count, green_count;

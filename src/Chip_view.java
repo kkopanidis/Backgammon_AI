@@ -2,11 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-/**
- * Kostas Kopanidis p3130098
- * Xrusa Mauraki p3130128
- * Lefteris Xatziarapis p3130255
- * */
+
 /**
  *
  * Chip class that extends the Jpanel

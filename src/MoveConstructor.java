@@ -1,9 +1,5 @@
 import java.util.HashSet;
-/**
- * Kostas Kopanidis p3130098
- * Xrusa Mauraki p3130128
- * Lefteris Xatziarapis p3130255
- * */
+
 public class MoveConstructor {
 
     public static HashSet<BoardState> found_states = new HashSet<>();

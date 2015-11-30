@@ -1,9 +1,4 @@
 public class Chance_Node extends Node {
-    /**
-     * Kostas Kopanidis p3130098
-     * Xrusa Mauraki p3130128
-     * Lefteris Xatziarapis p3130255
-     * */
 	public byte dice1;
 	public byte dice2;
 	private double a;

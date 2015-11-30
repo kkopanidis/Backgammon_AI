@@ -1,10 +1,4 @@
-/**
- * Kostas Kopanidis p3130098
- * Xrusa Mauraki p3130128
- * Lefteris Xatziarapis p3130255
- * The core of the intelligence, A.I IS ALWAYS PLAYER 2
- *
- */
+
 public class AI_Core {
 
     private double a, b;

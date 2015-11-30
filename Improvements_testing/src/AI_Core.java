@@ -1,7 +1,4 @@
 /**
- * Kostas Kopanidis
- * Xrusa Mauraki p3130128
- * Lefteris Xatziarapis p3130255
  * The core of the intelligence, A.I IS ALWAYS PLAYER 2
  *
  */
