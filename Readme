@@ -1,0 +1,1 @@
+Lots of refines and optimizations are needed throughout the file. The code was made in a hurry and there was not enough time left to make the necessary changes. The Tree structure is interesting, since it uses far less nodes than a regular minimax tree allowing the algorithm to run faster and with less memory requirements
