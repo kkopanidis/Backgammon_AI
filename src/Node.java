@@ -1,5 +1,9 @@
 import java.util.ArrayList;
-
+/**
+ * Kostas Kopanidis p3130098
+ * Xrusa Mauraki p3130128
+ * Lefteris Xatziarapis p3130255
+ * */
 public class Node {
 
 	protected ArrayList<Node> children;

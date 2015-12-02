@@ -1,4 +1,10 @@
+import java.util.LinkedList;
+import java.util.stream.Collectors;
+
 /**
+ * Kostas Kopanidis
+ * Xrusa Mauraki p3130128
+ * Lefteris Xatziarapis p3130255
  * The core of the intelligence, A.I IS ALWAYS PLAYER 2
  *
  */
@@ -170,7 +176,7 @@ public class AI_Core {
 
         Tree_Node node = index;
         while (node != null) {
-            NodeChildren(node, node.getColumn_State(), player, node.depth + 1, i);
+            NodeChildren(node, node.getColumn_State(), player, node.depth + 1, 1);
             node = node.getNextRight();
         }
 
@@ -193,27 +199,76 @@ public class AI_Core {
 
                 MoveConstructor.AvailableMoves(state, new int[]{i, j}, (byte) player, 1);
                 Chance_Node node_c;
-                if (MoveConstructor.found) {
-                    BoardState[] states = MoveConstructor.found_states.toArray(new BoardState[MoveConstructor.found_states.size()]) ;
-                    node_c = new Chance_Node(new byte[]{(byte) i, (byte) j}, MoveConstructor.a,
-                            MoveConstructor.b, MoveConstructor.mean, MoveConstructor.total, depth);
-                    gameTree.addNode(node_c, parent);
-                    node_c.depth = depth;
+                if (MoveConstructor.found && MoveConstructor.found_states.size()!=0) {
+
+                    final int k = i;
+                    final int p = j;
+                    final Chance_Node check;
+                    if(parent.children.stream()
+                            .anyMatch(n->((Chance_Node)n).dice1 == k && ((Chance_Node)n).dice2 == p )){
+
+                        check =(Chance_Node)parent.children.stream()
+                                .filter(n->((Chance_Node)n).dice1 == k && ((Chance_Node)n).dice2 == p )
+                                .collect(Collectors.toList()).get(0);
+
+                        if(check.a < MoveConstructor.a){
+                            check.a = MoveConstructor.a;
+                        }
+                        if(check.b < MoveConstructor.b){
+                            check.b = MoveConstructor.b;
+                        }
+                        check.mean += MoveConstructor.mean;
+                        check.digested += MoveConstructor.total;
+                        node_c = check;
+                    }
+                    else{
+                        node_c = new Chance_Node(new byte[]{(byte) i, (byte) j}, MoveConstructor.a,
+                                MoveConstructor.b, MoveConstructor.mean, MoveConstructor.total, depth);
+                        gameTree.addNode(node_c, parent);
+                        node_c.depth = depth;
+                    }
+
                     if(mode > 0) {
+                        LinkedList<BoardState> states = new LinkedList<>();
+                        states.addAll(MoveConstructor.found_states.stream().map(BoardState::new).collect(Collectors.toList()));
+
                         for (BoardState aState : states) {
                             if (player == 1)
-                                NodeChildren(node_c, aState, 2, depth + 1, depthOfSearch - mode - 1);
+                                NodeChildren(node_c, aState, 2, depth + 1, mode - 1);
                             else
-                                NodeChildren(node_c, aState, 1, depth + 1, depthOfSearch - mode - 1);
+                                NodeChildren(node_c, aState, 1, depth + 1, mode - 1);
                         }
                     }
                 }
                 else if (parent instanceof Chance_Node) {
+                    final int k = i;
+                    final int p = j;
+                    final Chance_Node check;
                     node_c = new Chance_Node((Chance_Node) parent);
-                    gameTree.addNode(node_c, parent);
-                    node_c.depth = depth;
-                    node_c.dice1 = (byte)i;
-                    node_c.dice2 = (byte)j;
+
+                    if(parent.children.stream()
+                            .anyMatch(n->((Chance_Node)n).dice1 == k && ((Chance_Node)n).dice2 == p )){
+
+                        check =(Chance_Node)parent.children.stream()
+                                .filter(n->((Chance_Node)n).dice1 == k && ((Chance_Node)n).dice2 == p )
+                                .collect(Collectors.toList()).get(0);
+
+                        if(check.a < node_c.a){
+                            check.a = node_c.a;
+                        }
+                        if(check.b < node_c.b){
+                            check.b = node_c.b;
+                        }
+                        check.mean += node_c.mean;
+                        check.digested += node_c.digested;
+                    }
+                    else {
+                        node_c = new Chance_Node((Chance_Node) parent);
+                        gameTree.addNode(node_c, parent);
+                        node_c.depth = depth;
+                        node_c.dice1 = (byte) i;
+                        node_c.dice2 = (byte) j;
+                    }
                 }
                 else {
                     double value = parent.getValue();
@@ -228,4 +283,5 @@ public class AI_Core {
             ++multiplier;
         }
     }
+
 }

@@ -1,4 +1,8 @@
-
+/**
+ * Kostas Kopanidis p3130098
+ * Xrusa Mauraki p3130128
+ * Lefteris Xatziarapis p3130255
+ * */
 public class Tree_Node extends Node{
 
 	private BoardState state;

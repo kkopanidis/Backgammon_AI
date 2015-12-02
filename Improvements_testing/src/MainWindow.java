@@ -6,7 +6,11 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
-
+/**
+ * Kostas Kopanidis p3130098
+ * Xrusa Mauraki p3130128
+ * Lefteris Xatziarapis p3130255
+ * */
 public class MainWindow implements MouseListener {
 
     private JFrame frame;

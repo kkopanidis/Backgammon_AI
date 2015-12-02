@@ -1,5 +1,9 @@
 import java.util.HashSet;
-
+/**
+ * Kostas Kopanidis p3130098
+ * Xrusa Mauraki p3130128
+ * Lefteris Xatziarapis p3130255
+ * */
 public class MoveConstructor {
 
     public static HashSet<BoardState> found_states = new HashSet<>();
@@ -22,7 +26,7 @@ public class MoveConstructor {
      * @param mode    mode 0 to not fill the a,b,mean values and mode 1 to fill them
      */
     public static void AvailableMoves(BoardState state, int[] dice, byte playerp, int mode) {
-
+        MoveConstructor.mode = mode;
         found = false;
         deepest_layer = 0;
         found_states.clear();
@@ -173,10 +177,8 @@ public class MoveConstructor {
                         new_state.ReleaseChip(player, dice[1]);
                     }
                 }
-
-                if (mode == 0)
-                    found_states.add(new_state);
-                else {
+                found_states.add(new_state);
+                if (mode == 1) {
                     Eval(new_state.Evaluate());
                     new_state.purge();
                 }
@@ -227,9 +229,8 @@ public class MoveConstructor {
                 }
 
                 if (moves == 0) {
-                    if (mode == 0) {
-                        found_states.add(capt_state);
-                    } else {
+                    found_states.add(capt_state);
+                    if (mode == 1) {
                         Eval(capt_state.Evaluate());
                     }
                     found = true;
@@ -456,13 +457,13 @@ public class MoveConstructor {
     }
 
     private static void Eval(int eval) {
-        mean += eval;
-        total++;
-        if (eval > a) {
-            a = eval;
+        MoveConstructor.mean += eval;
+        MoveConstructor.total++;
+        if (eval > MoveConstructor.a) {
+            MoveConstructor.a = eval;
         }
-        if (eval < b) {
-            b = eval;
+        if (eval < MoveConstructor.b) {
+            MoveConstructor.b = eval;
         }
     }
 

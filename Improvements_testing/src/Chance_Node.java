@@ -1,10 +1,15 @@
 public class Chance_Node extends Node {
+    /**
+     * Kostas Kopanidis p3130098
+     * Xrusa Mauraki p3130128
+     * Lefteris Xatziarapis p3130255
+     * */
 	public byte dice1;
 	public byte dice2;
-	private double a;
-    private double b;
-    private double mean;
-    private int digested;
+	public double a;
+	public double b;
+	public double mean;
+	public int digested;
 
     public Chance_Node(byte[]dice){
     	super();

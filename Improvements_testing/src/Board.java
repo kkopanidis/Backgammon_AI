@@ -2,6 +2,12 @@ import javax.swing.*;
 import java.util.LinkedList;
 import java.util.Random;
 /**
+ * Kostas Kopanidis p3130098
+ * Xrusa Mauraki p3130128
+ * Lefteris Xatziarapis p3130255
+ * */
+
+/**
  * The Master class that handles the board
  * refactored
  */

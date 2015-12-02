@@ -1,5 +1,9 @@
 import java.util.HashSet;
-
+/**
+ * Kostas Kopanidis p3130098
+ * Xrusa Mauraki p3130128
+ * Lefteris Xatziarapis p3130255
+ * */
 public class MoveConstructor {
 
     public static HashSet<BoardState> found_states = new HashSet<>();
@@ -22,7 +26,7 @@ public class MoveConstructor {
      * @param mode    mode 0 to not fill the a,b,mean values and mode 1 to fill them
      */
     public static void AvailableMoves(BoardState state, int[] dice, byte playerp, int mode) {
-
+        MoveConstructor.mode = mode;
         found = false;
         deepest_layer = 0;
         found_states.clear();
@@ -456,13 +460,13 @@ public class MoveConstructor {
     }
 
     private static void Eval(int eval) {
-        mean += eval;
-        total++;
-        if (eval > a) {
-            a = eval;
+        MoveConstructor.mean += eval;
+        MoveConstructor.total++;
+        if (eval > MoveConstructor.a) {
+            MoveConstructor.a = eval;
         }
-        if (eval < b) {
-            b = eval;
+        if (eval < MoveConstructor.b) {
+            MoveConstructor.b = eval;
         }
     }
 
