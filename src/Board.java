@@ -149,8 +149,8 @@ public class Board {
         int floor = 1;
         int sealing = 7;
         dice = new int[]{generator.nextInt(sealing - floor) + floor, generator.nextInt(sealing - floor) + floor};
-        MainWindow.dice_1.setIcon(new ImageIcon(MainWindow.dice[dice[0] - 1]));
-        MainWindow.dice_2.setIcon(new ImageIcon(MainWindow.dice[dice[1] - 1]));
+        MainWindow.dice_1.setIcon(MainWindow.dice[dice[0] - 1]);
+        MainWindow.dice_2.setIcon(MainWindow.dice[dice[1] - 1]);
         if (core_active)
             core.updateDice(dice);
         if (dice[0] == dice[1]) {

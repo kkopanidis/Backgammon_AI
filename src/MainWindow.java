@@ -1,10 +1,12 @@
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.LinkedList;
 /**
  * Kostas Kopanidis p3130098
@@ -15,7 +17,7 @@ public class MainWindow implements MouseListener {
 
     private JFrame frame;
     private Board board;
-    static Image[] dice;
+    static ImageIcon[] dice;
     static JLabel dice_1, dice_2, lblTimePlaying, backgammonBackground;
     private JButton btnCompletemove,  btnNewButton, btnNewButton_2;
     private boolean done = false;
@@ -51,25 +53,25 @@ public class MainWindow implements MouseListener {
         frame.setBounds(100, 100, 800, 800);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        URL[] urls = null;
+        
+        	 urls = new URL[]{MainWindow.class.getResource("/images/dice_1.jpg"), MainWindow.class.getResource("/images/dice_2.jpg"),
+        			MainWindow.class.getResource("/images/dice_3.jpg"), MainWindow.class.getResource("/images/dice_4.jpg"),
+        					MainWindow.class.getResource("/images/dice_5.jpg"), MainWindow.class.getResource("/images/dice_6.jpg"),
+        							MainWindow.class.getResource("/images/backgamon.jpg")};
+        	
+            dice = new ImageIcon[]{new ImageIcon((new ImageIcon(urls[0])).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH))
+            		, new ImageIcon((new ImageIcon(urls[1])).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)),
+            		new ImageIcon((new ImageIcon(urls[2])).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH))
+            		, new ImageIcon((new ImageIcon(urls[3])).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH))
+            		, new ImageIcon((new ImageIcon(urls[4])).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)),
+            		new ImageIcon(urls[5])};
 
-        try {
-            dice = new Image[]{ImageIO.read(new File("src/dice_1.jpg")).getScaledInstance(30, 30, Image.SCALE_SMOOTH),
-                    ImageIO.read(new File("src/dice_2.jpg")).getScaledInstance(30, 30, Image.SCALE_SMOOTH),
-                    ImageIO.read(new File("src/dice_3.jpg")).getScaledInstance(30, 30, Image.SCALE_SMOOTH),
-                    ImageIO.read(new File("src/dice_4.jpg")).getScaledInstance(30, 30, Image.SCALE_SMOOTH),
-                    ImageIO.read(new File("src/dice_5.jpg")).getScaledInstance(30, 30, Image.SCALE_SMOOTH),
-                    ImageIO.read(new File("src/dice_6.jpg")).getScaledInstance(30, 30, Image.SCALE_SMOOTH)};
-        } catch (Exception ignored) {
-
-        }
-
-        dice_1 = new JLabel("");
+        dice_1 = new JLabel(dice[0]);
         dice_1.setBounds(580, 350, 30, 30);
-        dice_1.setIcon(new ImageIcon(dice[0]));
 
-        dice_2 = new JLabel("");
+        dice_2 = new JLabel(dice[1]);
         dice_2.setBounds(580, 400, 30, 30);
-        dice_2.setIcon(new ImageIcon(dice[0]));
 
         frame.getContentPane().add(dice_1);
         frame.getContentPane().add(dice_2);
@@ -96,17 +98,12 @@ public class MainWindow implements MouseListener {
         lblTimePlaying.setBounds(10, 45, 130, 14);
         frame.getContentPane().add(lblTimePlaying);
 
-        Image img;
-        try {
-            img = ImageIO.read(new File("src/backgamon.jpg"));
+
             backgammonBackground = new JLabel("");
             backgammonBackground.setBounds(10, 70, 720, 641);
-            Image dimg = img.getScaledInstance(backgammonBackground.getWidth(), backgammonBackground.getHeight(), Image.SCALE_SMOOTH);
-            backgammonBackground.setIcon(new ImageIcon(dimg));
+            backgammonBackground.setIcon(new ImageIcon(urls[6]));
             frame.getContentPane().add(backgammonBackground);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     private void newGame() {
